@@ -3,7 +3,7 @@ services:
     build:
       context: . # 指定 Dockerfile 所在的目录
       dockerfile: Dockerfile
-    image: liveportrail:latest # 构建后生成的镜像名称
+    image: sobermh/liveportrail:latest # 构建后生成的镜像名称
     container_name: liveportrail # 容器名称
     # networks:
     #   ai_network:
@@ -41,4 +41,4 @@ services:
     #       cpus: "1.0" # 限制容器使用的 CPU 核心
     #     reservations:
     #       memory: 1G # 保证至少使用多少内存
-    command: [ "python", "app.py", "--server_port=9877", "--server_name=0.0.0.0"]
+    command: [ "python", "app.py", "--server_port=9877", "--server_name=0.0.0.0" ]
