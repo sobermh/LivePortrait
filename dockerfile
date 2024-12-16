@@ -8,6 +8,13 @@ LABEL description="Docker image for LivePortrait"
 ENV TZ=Asia/Shanghai \
     DEBIAN_FRONTEND=noninteractive
 
+# 安装 tzdata 并设置时区
+RUN set -e;\
+    apt-get update && \
+    apt-get install -y tzdata && \
+    ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && \
+    echo $TZ > /etc/timezone
+
 
 RUN set -e;\
     sed -i 's|http://archive.ubuntu.com/ubuntu/|https://mirrors.aliyun.com/ubuntu/|g' /etc/apt/sources.list && \
@@ -65,5 +72,5 @@ RUN set -e;\
     pip config set install.trusted-host pypi.tuna.tsinghua.edu.cn && \
     pip install --no-cache-dir -r requirements.txt
 
-CMD ["python","app.py","--flag_do_torch_compile"]
+CMD [ "bash" , "-c" , "python app.py --flag_do_torch_compile" ]
 # CMD ["python","app_animals.py"]
